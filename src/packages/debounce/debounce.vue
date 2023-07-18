@@ -1,4 +1,4 @@
-<scrtip>
+<script>
     export default {
         name:'debunceComponet',
         functional:true,
@@ -6,11 +6,6 @@
           eventName:{
             type:String,
             default:'click'
-          },
-          funcName:{
-            type:String,
-            default:'',
-            reqquired:true
           },
           dealy:{
             type:Number,
@@ -36,16 +31,15 @@
                     if(typeof funcResult === 'function'){
                       funcResult(_result)
                     }
-                  }, dealy);
+                  }, _dealy);
                 }
             }
       
             let vnode = ctx.slots().default[0],
             {
-              eventName : _eventName,
+              eventName:_eventName,
               dealy:_propDealy,
-              funcResult:_propFuncResult,
-              funcName:_propFuncName
+              funcResult:_propFuncResult
             } = ctx.props;
       
            
@@ -57,8 +51,6 @@
               let _listenerEvent = vnode.componentOptions.listeners[_eventName];
               vnode.componentOptions.listeners[_eventName] = __debounce(_listenerEvent,_propDealy,_propFuncResult).bind(vnode.context)
             }
-      
-          //return h('div','no 任何权限呀')
           return vnode
         }
     }

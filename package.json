@@ -1,23 +1,37 @@
 {
   "name": "vue2-functional-components",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "type": "module",
+  "description": "vue2 functional组件集合 抽象组件集合 elementUi扩展组件集合",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "rollupbuild": "rimraf dist/* && npm run build:esmvue2",
+    "build:esmvue2":"rollup -c rollup.config.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
+    "@vue/compiler-sfc": "^2.7.14",
+    "autoprefixer": "^9.8.8",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "rollup": "^3.26.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-minification": "^0.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-vue": "^5.1.9",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

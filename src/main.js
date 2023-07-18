@@ -1,6 +1,6 @@
 /* import Vue from 'vue' */
 
-import debounce from './packages/debounce'
+import debounce from './packages/debounce/debounce.vue'
 
 
 export {
