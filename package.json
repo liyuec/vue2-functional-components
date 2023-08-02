@@ -1,6 +1,6 @@
 {
   "name": "vue2-functional-components",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "private": false,
   "type": "module",
   "description": "vue2 functional组件集合 抽象组件集合 elementUi扩展组件集合",
@@ -59,9 +59,7 @@
     "not dead"
   ],
   "sideEffects": false,
-  "main": "dist/vue2functionalcomponents.umd.js",
-  "module":"dist/vue2functionalcomponents.esm.js",
-  "browser":"dist/vue2functionalcomponents.iife.js",
+  "main": "./dist/index.esm.js",
   "files":["dist"],
   "publishConfig": {
     "access": "public"

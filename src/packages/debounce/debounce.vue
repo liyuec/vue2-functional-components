@@ -26,7 +26,7 @@
                     clearTimeout(timer)
                   }
                   timer = setTimeout(()=>{
-                    console.log(args)
+                   /*  console.log(args) */
                     _result = fn.apply(this,args);
                     if(typeof funcResult === 'function'){
                       funcResult(_result)

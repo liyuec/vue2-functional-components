@@ -7,9 +7,21 @@ import common from 'rollup-plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 
 export default{
-    input:'src/main.js',
+    input:'./src/main.js',
     external: ['vue'],
-    output:[ 
+    output: [
+        {
+          file: 'dist/index.esm.js',
+          format: 'esm',
+          exports: 'named'
+        },
+        {
+          file: 'dist/index.umd.js',
+          format: 'umd',
+          name: 'w'
+        }
+      ],
+   /*  output:[ 
             {
                 globals:'vue2functionalcomponents',
                 dir:"dist",
@@ -33,7 +45,7 @@ export default{
                 entryFileNames:"vue2functionalcomponents.esm.js",
                 format:'es'
             }
-    ],
+    ], */
    /*  output:{
         dir:"dist",
         //file:'vue2functionalcomponents',
@@ -41,13 +53,13 @@ export default{
         format:'es'
     }, */
     plugins:[
+        common(),
         vue({
             css:true,
             compilerTemplate:true,
             preprocessStyles: true
         }),
         resolve(),
-        common(),
         postcss({
             plugins:[
                 autoprefixer()
@@ -55,7 +67,8 @@ export default{
         }),
         babel({
             exclude: 'node_modules/**',
-            babelHelpers: 'runtime'
+            babelHelpers: 'runtime',
+            presets: ['@vue/babel-preset-jsx'],
         }),
         //terser()
        
