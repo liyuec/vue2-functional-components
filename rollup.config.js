@@ -13,11 +13,13 @@ export default{
         {
           file: 'dist/index.esm.js',
           format: 'esm',
+          //sourcemap:true,
           exports: 'named'
         },
         {
           file: 'dist/index.umd.js',
           format: 'umd',
+          //sourcemap:true,
           name: 'w'
         }
       ],
@@ -70,7 +72,7 @@ export default{
             babelHelpers: 'runtime',
             presets: ['@vue/babel-preset-jsx'],
         }),
-        //terser()
+        terser()
        
     ]
 }

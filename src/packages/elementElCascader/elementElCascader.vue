@@ -19,6 +19,10 @@
           handleClearFunc:{
             type:Function,
             default:null
+          },
+          firstClickNode:{
+            type:Boolean,
+            default:false
           }
         },
         mounted(){
@@ -31,6 +35,27 @@
               _cascaderHandleClear();
               _handleClearFunc();
             } 
+          }
+          if(this.firstClickNode){
+            _vnode.componentInstance.$el.querySelector(".el-cascader__dropdown").addEventListener("click",this.firstNodeFunc,true)
+          }
+        },
+        methods:{
+          firstNodeFunc(event){
+              let checkboxValue = void 0,
+              _node = void 0
+              if(event.target.nodeName === 'SPAN' && event.target.className.indexOf('el-checkbox') > -1){
+                checkboxValue = event.target.parentNode.parentNode.__vue__.selfModel;
+                _node = event.target.parentNode.parentNode.parentNode.__vue__.node;
+                 //console.log(checkboxValue,_node)
+              }
+              queueMicrotask(()=>{
+                  this.$emit('firstNodeBind', {
+                  checkboxValue:checkboxValue,
+                  label:!!_node ? _node.label : "",
+                  value:!!_node ? _node.value : ""
+                })
+              })
           }
         },
         updated(){
