@@ -15,11 +15,13 @@ export {
 import debunceComponet from './packages/debounce/debounce.vue'
 import throttleComponet from './packages/throttle/throttle.vue'
 import elementElCascader from './packages/elementElCascader/elementElCascader.vue'
+import elementOmit from './packages/omit/elementOmit.vue'
 
 const components = [
   debunceComponet,
   throttleComponet,
-  elementElCascader
+  elementElCascader,
+  elementOmit
 ];
 
 const install = function (Vue) {
@@ -39,5 +41,6 @@ export default {
 	// 按需导出
   debunceComponet,
   throttleComponet,
-  elementElCascader
+  elementElCascader,
+  elementOmit
  };
