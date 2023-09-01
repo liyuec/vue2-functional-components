@@ -73,7 +73,7 @@
             function loadPlace(){
               if(!document.querySelector(`#${_dId}`)){
                 setTimeout(()=>{
-                  console.log('settimeout')
+                  //console.log('settimeout')
                   loadPlace();
                 },100)
               }else{
