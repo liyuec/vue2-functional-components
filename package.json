@@ -1,6 +1,6 @@
 {
   "name": "vue2-functional-components",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "private": false,
   "type": "module",
   "description": "vue2 functional组件集合 抽象组件集合 elementUi扩展组件集合",
