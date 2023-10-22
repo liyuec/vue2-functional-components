@@ -1,6 +1,6 @@
 {
   "name": "vue2-functional-components",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": false,
   "type": "module",
   "description": "vue2 functional组件集合 抽象组件集合 elementUi扩展组件集合",
@@ -16,7 +16,7 @@
     "rollupbuild": "rimraf dist/* && npm run build:esmvue2",
     "rolluplink":"rimraf dist/* && npm run build:linkvue2",
     "build:esmvue2": "rollup -c rollup.config.js",
-    "build:linkvue2":"rollup -c rollup.link.config.js"
+    "build:linkvue2":"rollup -c rollup.link.config.js && yalc push"
   },
   "dependencies": {
     "core-js": "^3.6.5",

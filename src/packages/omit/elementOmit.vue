@@ -27,6 +27,30 @@
           dealy:{
             type:Number,
             default:200
+          },
+          tipData:{
+            data:{
+              type:Object,
+              default:()=>{
+                return Object.create(null);
+              }
+            },
+            tipElContenHtml:{
+              type:String,
+              default:''
+            },
+          },
+          tipTargetKeyName:{
+              type:String,
+              default:'value'
+          },
+          //'beforebegin'、'afterbegin'、'beforeend'、'afterend'
+          tipPosition:{
+              type:String,
+              default:'afterend',
+              validator(val) {
+                return ['beforebegin','afterbegin','beforeend','afterend'].indexOf(val) !== -1;
+              }
           }
         },
         render(h){
@@ -45,7 +69,6 @@
                   break;    
               }
           }
-         
           switch(this.eltype){
               case 'ElCascader':
                this.addElCasecaderOmitStyle();
@@ -54,7 +77,11 @@
                this.addElCasecaderOmitStyle();
               break;    
           }
-         
+
+          //增加tips
+          if(!!Object.keys(this.tipData.data).length){
+            this.addTips(_vnode);
+          }
         },
         update(){
         },
@@ -67,9 +94,62 @@
             this._obServerDown.disconnect();
           }
 
+          if(!!this._obServerTip){
+            this._obServerTip.disconnect();
+          }
+
           this.removeElCasecaderOmitStyle();
         },
         methods:{
+          addTips(_vnode){
+            let _elTipsContent = _vnode.componentInstance.$el.querySelector('.el-cascader__dropdown'),
+            _tipData = this.tipData.data,
+            _tipElementHTML = this.tipData.tipElContenHtml,
+            _tipPosition = this.tipPosition,
+            _tipTargetKeyName = this.tipTargetKeyName,
+            obOptions = {
+              childList: true, // 观察目标子节点的变化，是否有添加或者删除
+              subtree: true  // 观察后代节点，默认为 false
+            };
+
+            _elTipsContent = _elTipsContent.querySelector('.el-cascader-panel');
+            _tipElementHTML = _tipElementHTML.split(">")
+
+            this._obServerTip = void 0;
+            function observerTipCB(){
+              _elTipsContent.querySelectorAll('.el-cascader-node').forEach(panel=>{
+                  //单选多选是这样的数据结构
+                  let _valueOfKey = panel.__vue__[_tipTargetKeyName],
+                  spanHtmlElementIndex = 0;
+
+                  _valueOfKey = _valueOfKey.slice(-1)[0];
+
+                  if(!!_tipData[_valueOfKey]){
+                      Array.prototype.some.call(panel.children,(el,inx)=>{
+                          if(el.nodeName === 'SPAN'){
+                            spanHtmlElementIndex = inx;
+                            return true;
+                          }
+                      })
+                      
+                      if(!panel.isHaveTip){
+                        panel.isHaveTip = true;
+                       
+                        panel.children[spanHtmlElementIndex].insertAdjacentHTML(_tipPosition,`${_tipElementHTML[0]} title='${_tipData[_valueOfKey]}' >${_tipElementHTML}`);
+                      }
+                  }
+
+ 
+
+              })
+            }
+
+            this._obServerTip = new MutationObserver(this.debounce(observerTipCB.bind(this)));
+            this._obServerTip.observe(_elTipsContent,obOptions)
+            setTimeout(()=>{
+              observerTipCB.call(this);
+            },1000);
+          },
           addElCasecaderOmitStyle(){
               if(!this.omitMaxWidth){
                 return;
@@ -107,7 +187,8 @@
                 let _value = _elemInput.value;
                 _elemInput.setAttribute('title',_value);
               }
-              this._elInput.querySelector("input").value
+              this._elInput.querySelector("input").value;
+
             }
 
             function observerDownCB(){
