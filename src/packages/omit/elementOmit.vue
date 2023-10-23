@@ -79,7 +79,10 @@
           }
 
           //增加tips
-          if(!!Object.keys(this.tipData.data).length){
+         /*  if(!!Object.keys(this.tipData.data).length){
+            this.addTips(_vnode);
+          } */
+          if(this.tipData && this.tipData.data && !!Object.keys(this.tipData.data).length){
             this.addTips(_vnode);
           }
         },
@@ -117,6 +120,7 @@
 
             this._obServerTip = void 0;
             function observerTipCB(){
+              _tipData = this.tipData.data;
               _elTipsContent.querySelectorAll('.el-cascader-node').forEach(panel=>{
                   //单选多选是这样的数据结构
                   let _valueOfKey = panel.__vue__[_tipTargetKeyName],
