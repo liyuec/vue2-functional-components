@@ -17,6 +17,7 @@ import throttleComponet from './packages/throttle/throttle.vue'
 import elementElCascader from './packages/elementElCascader/elementElCascader.vue'
 import elementOmit from './packages/omit/elementOmit.vue'
 import outSideComponent from './packages/outSide/outSide.vue'
+import vueMethodDecorator from './packages/vueMethodDecorator/vueMethodDecorator.vue'
 
 
 
@@ -25,7 +26,8 @@ const components = [
   throttleComponet,
   elementElCascader,
   elementOmit,
-  outSideComponent
+  outSideComponent,
+  vueMethodDecorator
 ];
 
 const install = function (Vue) {
@@ -47,5 +49,6 @@ export default {
   throttleComponet,
   elementElCascader,
   elementOmit,
-  outSideComponent
+  outSideComponent,
+  vueMethodDecorator
  };

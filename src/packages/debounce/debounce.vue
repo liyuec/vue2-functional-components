@@ -9,7 +9,7 @@
           },
           dealy:{
             type:Number,
-            default:500
+            default:300
           },
           funcResult:{
             type:Function,
