@@ -18,8 +18,11 @@
             }
         },  
         render(h){
-          let _vnode =  this.$slots.default[0];
-          return _vnode;
+            if(this.$slots.default === void 0){
+                return;
+            }          
+            let _vnode =  this.$slots.default[0];
+            return _vnode;
         },
         mounted(){
             function __debounce(cb,dealy,functionResult,vm){

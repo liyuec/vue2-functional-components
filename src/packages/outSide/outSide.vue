@@ -5,6 +5,9 @@
         props:{
         },
         mounted(){
+          if(this.$slots.default === void 0){
+            return;
+          }
           this.onEvent = (function(){
               if(document.addEventListener){
                 return function(el,event,hander,type){
@@ -61,6 +64,9 @@
           this.removeOutSide()
         },
         render(h){
+          if(this.$slots.default === void 0){
+            return;
+          }
           let _vnode =  this.$slots.default[0];
           return _vnode;
         }
