@@ -17,6 +17,10 @@
           }
         },
          render(h,ctx){
+            if(ctx.slots().default === void 0){
+              return;
+            }
+
             function  __debounce(fn,dealy,funcResult){
                 let timer = 0,
                 _dealy = dealy,
@@ -34,7 +38,7 @@
                   }, _dealy);
                 }
             }
-      
+
             let vnode = ctx.slots().default[0],
             {
               eventName:_eventName,

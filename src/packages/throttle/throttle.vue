@@ -17,35 +17,40 @@
           }
         },
          render(h,ctx){
-            function  __throttle(fn,dealy,funcResult){
-                let timer = 0,
-                timeBegin = 0,
-                _dealy = dealy,
-                _result = void 0;
-                return function throttle(...args){
-                  if(!timeBegin){
-                    timeBegin = Date.now();
-                  }
-                  if(Date.now() - timeBegin > _dealy){
-                    _result = fn.apply(this,args);
-                    if(typeof funcResult === 'function'){
-                      funcResult(_result)
-                    }
-                    clearTimeout(timer)
-                    timeBegin = 0;
-                  }else{
-                    clearTimeout(timer);
-                    timer = setTimeout(()=>{
-                        _result = fn.apply(this,args);
-                        if(typeof funcResult === 'function'){
-                          funcResult(_result)
-                        }
-                        timeBegin = 0;
-                    },_dealy)
-                  }
+
+          if(ctx.slots().default === void 0){
+            return;
+          }
+
+          function  __throttle(fn,dealy,funcResult){
+              let timer = 0,
+              timeBegin = 0,
+              _dealy = dealy,
+              _result = void 0;
+              return function throttle(...args){
+                if(!timeBegin){
+                  timeBegin = Date.now();
                 }
+                if(Date.now() - timeBegin > _dealy){
+                  _result = fn.apply(this,args);
+                  if(typeof funcResult === 'function'){
+                    funcResult(_result)
+                  }
+                  clearTimeout(timer)
+                  timeBegin = 0;
+                }else{
+                  clearTimeout(timer);
+                  timer = setTimeout(()=>{
+                      _result = fn.apply(this,args);
+                      if(typeof funcResult === 'function'){
+                        funcResult(_result)
+                      }
+                      timeBegin = 0;
+                  },_dealy)
+                }
+              }
             }
-      
+
             let vnode = ctx.slots().default[0],
             {
               eventName:_eventName,
