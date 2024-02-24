@@ -25,6 +25,10 @@
             return _vnode;
         },
         mounted(){
+            if(this.$slots.default === void 0){
+                return;
+            }    
+
             function __debounce(cb,dealy,functionResult,vm){
                 let clearId = void 0,
                 _dealy = dealy,
